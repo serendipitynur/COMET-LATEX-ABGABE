@@ -1,0 +1,211 @@
+\documentclass[11pt]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+\usepackage[utf8]{inputenc}
+\usepackage{biblatex}
+\usepackage[ngerman]{babel}
+\usepackage{csquotes} 
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{ragged2e}
+\addbibresource{literatur.bib}
+\usepackage[T1]{fontenc}
+\usepackage{float}
+
+\title{Abgabe 1 für Computergestützte Methoden}
+\author{Gruppe 10, Nuraiym Miratbekova 4260509, Rica Minnerup 4159793}
+\date{02.12.2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Der zentrale Grenzwertsatz}
+Der zentrale Grenzwert (ZGS) ist ein fundamentales Resultat der Wahrscheinlichkeitstheorie, das die Verteilung von Summen unabhängiger, identisch verteilter (\textit{i.i.d}) Zufallsvariablen (ZV) beschreibt. Er besagt, dass unter bestimmten Voraussetzungen die Summe einer großen Anzahl solcher ZV annähernd normalverteilt ist, unabhängig von der Verteilung der einzelnen ZV. Dies ist besonders nützlich, da die Normalverteilung gut untersucht und mathematisch handhabbar ist.
+
+\subsection{Aussage}
+Sei $X_1, X_2, ..., X_n$ eine Folge von \textit{i.i.d} ZV mit dem Erwartungswert \( \mu = \mathbb{E} (X_i)\) und der Varianz $\sigma^2 = \mathrm{Var}(X_i)$, wobei \(0 < \sigma^2 < \infty \) gelte. Dann konvergiert die standardisierte Summe $Z_n$ dieser ZV für \( n \xrightarrow{}\infty\) in Verteilung gegen eine Standordnormalverteilung: \footnote{Der zentrale Grenzwert hat verschieden Verallgemeinerungen. Eine davon ist der \textbf{Lindeberg-Feller-Zentrale-Grenzwertsatz} \cite[Seite 328]{klenke}, der schwächere Bedingungen an die Unabhängigkeit und die identsiche Verteilung der ZV stellt.}
+\begin{equation}
+    \label{eq:standardnormalverteilung}
+    Z_n = \frac{\sum_{i=1}^n X_i - n \mu}{\sigma\sqrt{n}} \xrightarrow{d} \mathcal{N} (0,1).
+\end{equation}
+Das bedeutet, dass für große \textit{n} die Summe der ZV näherungsweise normalverteilt ist mit Erwartungswert \(n \mu\) und Varianz \(n\sigma^2\):
+\begin{equation}
+    \label{eq:summe_zv}
+    \sum_{i=1}^n X_i \sim \mathcal{N}(n\mu, n\sigma^2).
+\end{equation}
+
+\subsection{Erklärung der Standardisierung}
+Um die Summe der ZV in eine Standardnormalverteilung zu transformieren, subtrahiert man den Erwartungswert \(n\mu\) und teilt durch die Standardabweichung \(\sigma \sqrt{n}\). Dies führt zu der obigen Formel \eqref{eq:standardnormalverteilung}. Die Darstellung \eqref{eq:summe_zv} ist für \(n \xrightarrow{} \infty\) nicht wohldefiniert.
+
+\subsection{Anwendungen}
+Der ZGS wird in vielen Bereichen der Statistik und der Wahrscheinlichkeitstheorie angewendet. Typische Beispiele sind:
+\begin{itemize}
+    \item Qualitätskontrolle in der Produktion zur Modellierung von Stichprobenmittelwerten
+    \item Marktforschungsanalyse, um Vorhersagen für die gesamte Kundenbasis anhand der Modellierung der Verteilung zu treffen
+\end{itemize}
+\newpage
+
+\section{Bearbeitung zur Aufgabe 1}
+
+\subsection{Thema Datenverarbeitung}
+Aufgabenstellung: Berechnung der höchsten mittleren Temperatur in Grad Celcius mit einer Tabellenkalkulation.\par
+
+\begin{enumerate}
+    \item Für unsere Gruppe 10 ist die Station 4\textsuperscript{th} Ave \& E 12\textsuperscript{th} Street relevant. Aus insgesamt 36.440 Zeilen, befassen wir uns mit Daten von 365 Tagen aus dem Jahr 2023.
+
+    Nach der Untersuchung der Exceltabelle, fanden wir zwölf fehlende und einige negative Werte für die Spalten ''precipitation'', ''windspeed'', \\ ''min\_temperature'' ''average\_temperature'', ''max\_temperature'', und \\ ''count''.
+
+    \item 
+    Zum importieren des Datensatzes "bike\_sharing\_data\_ \\(with\_NAs).csv" haben wir zuerst die Datei aus dem Moodle-Lernraum heruntergeladen. Wir öffneten eine Excelmappe und wählten die Registerkarte ''Daten'' aus dem Menüband.
+    
+    Danach wählten wir ''Aus Text/CSV'', um die notwendige Datei auszuwählen und mussten die Formatierung anpassen, sodass das Trennzeichen das Komma ist, aber die Werte ihrem Dateiformat dennoch entsprechen und nicht verzerrt wurden.
+    
+    Für die Übersichlichkeit filterten wir nach unserer Gruppe mit dem Filter-Tool direkt in der Spalte ''group'', beim Filtern haben wir die fehlenden Werte (NA's) mit der Zahl Null ersetzt. Somit konnten wir ohne die Eliminierung von ganzen Spalten die allgemeine Integrität der Daten erhalten.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\linewidth]{Screenshot 2024-12-01 193010.png}
+        \caption{Excelmappe der modifizierten CSV-Datei}
+        \label{fig:first-figure}
+    \end{figure}
+    
+    \item Zur Berechnung der höchsten mittleren Temperatur aus dem Datensatz nutzten wir wieder das Filter-Tool zum Sortieren der Spalte \\''average\_temperature'' in absteigender Reihenfolge. Die höchste mittlere Temperatur war am 28.07.2023 mit 83°F. 
+    
+    Nun wenden wir die Umrechnungsformel von Grad Fahrenheit auf Grad Celsius an, die folgendermaßen lautet: 
+    
+\[C = \frac{5}{9} \times (F - 32) \]
+
+    Wir setzen 83°F in die Umrechnungsformel ein. Dies sah wie folgt aus:
+\[C = \frac{5}{9} \times (83 - 32) \]
+
+    Durch einfaches Ausrechnen ergibt sich eine Temperatur von \( 28,\overline{3} \)° Celsius, beziehungsweise aufgerundet 28,4° C.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Screenshot 2024-12-01 200112.png}
+    \caption{Excelmappe mit der höchsten mittleren Temperatur von 83°F}
+    \label{fig:second-figure}
+\end{figure}
+        
+\end{enumerate}
+
+
+\subsection{Thema Datenhaltung}
+
+\subsubsection{Datenbank-Schema}
+Nachdem wir DBMS SQLite untersucht hatten, überlegten wir uns zunächst ein allgemeines Datenbank-Schema, welches dem der Vorlesung entspricht.
+
+Die erste primäre Tabelle namens ''GroupStation'' für die eindeutig \\ gekennzeichneten Gruppen und Stationen und die zweite Tabelle namens ''Bikesharingdata'' mit ''group\_id'' als Fremdschlüssel und den restlichen \\ Werten.
+
+\paragraph*{Tabelle: GroupStation}
+
+\begin{longtable}{|>{\bfseries}l|l|l|}
+\hline
+Feldname & \textbf{Datentyp} & \textbf{Beschreibung} \\
+\hline
+\endfirsthead
+\hline
+Feldname & Datentyp & Beschreibung \\
+\hline
+\endhead
+\hline
+\underline{group} & INTEGER PRIMARY & Name der Gruppe \\
+station & TEXT & Name der Station \\
+\hline
+\end{longtable}
+
+
+\paragraph*{Tabelle: Bikesharingdata} 
+\RaggedRight
+\begin{longtable}{|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}p{4cm}|}
+\hline 
+\textbf{Feldname} & \textbf{Datentyp} & \textbf{Beschreibung} \\
+\hline
+\underline{\textbf{group\_id}} & INTEGER PRIMARY & Fremdschlüssel (group von Tabelle GroupStation) \\ 
+\underline{\textbf{date}} & DATE PRIMARY & Datum \\ 
+day\_of\_year & INTEGER & Tag des Jahres \\ 
+day\_of\_week & INTEGER & Wochentag \\
+month\_of\_year & INTEGER & Monat des Jahres \\ 
+precipitation & REAL & Niederschlag (mm) \\ 
+windspeed & REAL & Windgeschwindigkeit \\ 
+    &   & (km/h) \\
+min\_temperature & REAL & Minimale \\ 
+    &   & Temperatur °F \\
+average\_temperature & REAL & Durchschnittliche \\
+    &   & Temperatur °F \\
+max\_temperature & REAL & Maximale Temperatur (°F) \\ 
+count & INTEGER & Anzahl Aufzeichnungen \\ 
+\hline 
+\end{longtable}
+
+
+Notation des Datenbank-Schemas:
+
+\begin{itemize}
+    \item GroupStation (\underline{group \#}, station); \\
+    \item Bikesharingdata (\underline{group\_id} \#, \underline{date} \#, day\_of\_year, day\_of\_week, month\_of\_year, precipitation, windspeed, min\_temperatur, \\ average\_temperature, max\_temperature, count);\\
+\end{itemize}
+
+
+\subsubsection{DDL}
+\paragraph{Erstellen der Datenbank in SQL:\\}
+\vspace{1em}
+
+\textbf{CREATE TABLE GroupStation} ( \\
+        „group” \textbf{INTEGER PRIMARY KEY AUTOINCREMENT},\\
+        station \textbf{VARCHAR (255)}\\
+    );
+\vspace{1em}
+
+    \textbf{CREATE TABLE Bikesharingdata} (\\
+        group\_id \textbf{INTEGER NOT NULL}, \\
+        “date” \textbf{DATE NOT NULL},\\
+        day\_of\_year \textbf{INTEGER}\\
+        day\_of\_week \textbf{INTEGER},\\
+        month\_of\_year \textbf{INTEGER},\\
+        precipitation \textbf{REAL},\\
+        windspeed \textbf{REAL},\\
+        min\_temperatur \textbf{REAL},\\
+        average\_temperatur \textbf{REAL},\\
+        max\_temperatur \textbf{REAL},\\
+        “count” \textbf{INTEGER},\\
+        \textbf{FOREIGN KEY} (group\_id) \textbf{REFERENCES} GroupStation(“group”)\\
+    );\\
+\vspace{1em}
+    
+\textbf{Vorgehen beim Importieren der Daten aus der CSV-Datei:}\\
+Aufgrund dessen, dass wir beim Erstellen der Datenbank die Online-Version von SQLite benutzt haben, kam es zu Abweichungen beim Vorgehen des Importierens der CSV-Dateien in die Datenbank. 
+
+Wir haben vor dem Importieren der Daten, die bereits überarbeitete Tabelle von
+Aufgabe 1.1 (Datenverarbeitung) entsprechend unserem Datenbanken-Schema in einzelne Tabellen aufgeteilt und jeweils als eigene CSV-Dateien abgespeichert. Anschließend haben wir die Importier-Funktion von SQLite genutzt und die vorbereiteten Tabellen ausgewählt. Die Einstellungen wurden so angepasst, dass das Trennzeichen zum Semikolon geändert wurde, (die Änderung entstand durch die Speicherung der Daten von Excel aus), und die erste Zeile war die Spaltenüberschrift. 
+
+Nach der Importierung, existierten die jeweiligen Tabellen mit den zugehörigen Werten in unserer Datenbank. Anschließend wurde mit den jeweiligen Abfragen ''SELECT * FROM GroupStation LIMIT 15;'' und ''SELECT * FROM Bikesharingdata LIMIT 15;'' die Richtigkeit der Daten überprüft.
+\\
+
+\subsubsection{SQL-Abfrage: höchste mittlere Temperatur bestimmen}
+
+
+
+SELECT {(5.0/9.0 * (MAX (b.average\_temperature) - 32))} AS \\ max\_average\_temperatur\_celsius WHERE group\_id = 10\\
+FROM bikesharingdata b;\\
+\vspace{1em}
+Output der Abfrage: 28.333333333333336\\
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{screenshot_Abfrage.png}
+    \caption{\raggedright Abfrage zur Ermittlung der maximalen mittleren Temperartur in Grad Celsius}
+    \label{fig:third-figure}
+\end{figure}
+
+\newpage
+
+\printbibliography
+
+\end{document}
